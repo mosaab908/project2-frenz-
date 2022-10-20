@@ -1,0 +1,116 @@
+<div class="container">
+    <div class="profile-header">
+        <div class="profile-img">
+            <img [src]="this.user.imageUrl" alt="" onerror="this.src='assets/images/user1.png'">
+        </div>
+        <div class="profile-nav-info">
+            <h3 class="user-name">{{user.firstName}} {{user.lastName}}</h3>
+            <div class="address">
+                <p class="City">Atlanta,</p>
+                <p class="State"><span>Georgia</span></p>
+            </div>
+        </div>
+        <!-- <div class="profile-option">
+            <div class="notification">
+                <i class="fa fa-bell"></i>
+                <span class="alert-message">1</span>
+            </div>
+        </div> -->
+    </div>
+    <div class="main-bd">
+        <div class="left-side">
+            <div class="profile-side">
+                <p class="mobile-no">
+                    <i class="fa fa-phone">&nbsp;&nbsp;+1 404-503-6682</i>
+                </p>
+                <p class="user-mail">
+                    <i class="fa fa-envelope">&nbsp;&nbsp;{{user.email}}</i>
+                </p>
+                <div class="user-bio">
+                    <h2>Bio</h2>
+                    <p class="bio">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum impedit nemo quae labore
+                        praesentium excepturi illum optio voluptatibus fugit fuga ratione commodi pariatur, minima
+                        tempora debitis inventore repellat ut dignissimos?
+                    </p>
+                </div>
+                <div class="profile-btn">
+                    <button class="chatbtn">
+                        <i class="fa fa-comment">Chat</i>
+                    </button>
+                    <button class="createbtn" *ngIf="compareIds()" [routerLink]="['/post-feed']">
+                        <i class="fa fa-plus">Create</i>
+                    </button>
+                </div>
+                <div class="user-rating">
+                    <h3 class="rating">4.5</h3>
+                    <div class="rate">
+                        <div class="star">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                        </div>
+                        <span class="no-user">
+                            <span>123</span>&nbsp;reviews
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="right-side">
+            <div class="nav">
+                <ul>
+                    <li (click)="show(0)" class="user-post active">Posts</li>
+                    <li (click)="show(1)" class="user-review">Reviews</li>
+                    <li (click)="show(2)" *ngIf="compareIds()" class="user-setting">Settings</li>
+                </ul>
+            </div>
+            <div class="profile-body">
+                <div *ngIf="showTab == 0" class="profile-posts tab">
+                    <ul *ngFor="let post of userPosts">
+                        <app-post [post]="post"></app-post>
+                    </ul>
+                </div>
+                <div *ngIf="showTab == 1" class="profile-review tab">
+                    <p>Review tab in progress!.</p>
+                </div>
+                <div *ngIf="showTab == 2"class="profile-setting tab" >
+                    <form class="info-form validate-form">  
+                        <div *ngIf ="successAlert" class="alert alert-success alert-dismissible fade show" role="alert" style="color: rgb(53, 235, 53);">
+                            <strong >Successfull!</strong> Your information has been updated.
+                            <button (click)="closeSuccessAlert()" type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div *ngIf ="unSuccessAlert"class="alert alert-danger alert-dismissible fade show" role="alert" style="color: rgb(240, 66, 66);">
+                            <strong >Unsuccessful!</strong> Email is unavailable.
+                            <button (click)="closeUnsuccessAlert()" type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>                                  
+                       
+                        <div class="wrap-input100 validate-input">
+                            <input class="input100" type="text" name="firstName" [(ngModel)]="user.firstName"  >
+                        </div>
+                    
+                        <div class="wrap-input100 validate-input">
+                            <input class="input100" type="text"  name="lastName" [(ngModel)] ="user.lastName" >
+                        </div>
+                        <div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+                            <input class="input100" type="text" name="email" [ngClass]="{'is-invalid': !unSuccessAlert}" [(ngModel)]="user.email"  >                    
+                        </div>
+                        <div class="wrap-input100 validate-input">
+                            <input class="input100" type="password"  name="password" [(ngModel)] ="user.password" >
+                        </div>
+                        <div class="wrap-input100 validate-input">
+                            <input class="input100" type="text"  name="image" [(ngModel)] ="user.imageUrl" placeholder="Change Profile Picture">
+                        </div>
+                        <button class="update-form-btn"  (click) ="update()">Save changes</button>       
+                    </form> 
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

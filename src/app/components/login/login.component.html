@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
+    <mat-card class="box">
+      <mat-card-header>
+        <mat-card-title>Log in</mat-card-title>
+      </mat-card-header>
+      <form class="form" [formGroup]="loginForm" (ngSubmit)="onSubmit($event)">
+            <mat-card-content>
+              <mat-form-field class="full-width">
+                <input matInput placeholder="Email" formControlName="email">
+              </mat-form-field>
+              <mat-form-field class="full-width">
+                <input matInput placeholder="Password" type="password" formControlName="password">
+              </mat-form-field>
+                  <label [ngStyle]="{'visibility': invalidCredintials ? 'visible' : 'hidden' }" 
+                  style="color:red">Invalid username or password!</label>
+              </mat-card-content>
+            <button mat-stroked-button color="accent" class="btn-block" type="submit">Log in</button>
+            <a class="login-rerout-link" [routerLink]="['/register']">Don't have an account?</a>
+            <div class="spacer">
+            </div>
+      </form>
+    </mat-card>
+  </div>
+  <div class="left">
+    <img src="assets/images/login.jpg">
+  </div>
+</div>

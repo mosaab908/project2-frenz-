@@ -1,0 +1,51 @@
+<div class="container">
+    
+    <div class="search"> 
+        <input #keyword type="text" placeholder="Search..." (keyup) = "getUsersByName(keyword.value)" (keydown) = "clearSearch()">
+        <div class="dropdown-content">
+            <div class="userWrap" *ngFor="let user of users">
+                <div>
+                    <div>
+                        <a rel="noopener" href="http://localhost:4200/profile"><button (click)="goToProfile(user.id)" style="width: 170px;">{{user.firstName}} {{user.lastName}} {{user.id}}</button></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div [ngClass]="['sidebyside', 'post-feed-container']">
+        <form class="form" *ngIf="!createPost; else createPostTemplate">
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Something on your mind?</mat-label>
+                <input matInput (focus)="toggleCreatePost()">
+            </mat-form-field>
+        </form>
+    
+        <ng-template #createPostTemplate>
+            <form class="form" [formGroup]="postForm" (ngSubmit)="submitPost($event)">
+                <mat-form-field class="full-width" appearance="fill">
+                    <mat-label>Make a Post</mat-label>
+                    <textarea matInput autofocus formControlName="text"></textarea>
+                </mat-form-field>
+                <mat-form-field class="full-width" appearance="fill">
+                    <mat-label>Add an Image?</mat-label>
+                    <input matInput formControlName="imageUrl">
+                </mat-form-field>
+                <mat-form-field class="full-width" appearance="fill">
+                    <mat-label>Add a Video?</mat-label>
+                    <input matInput formControlName="youtubeUrl">
+                </mat-form-field>
+                <div align="end">
+                    <button mat-raised-button color="warn" (click)="toggleCreatePost()">Cancel</button>
+                    <button mat-raised-button color="primary" (click)="submitPost($event)">Post</button>
+                </div>
+    
+            </form>
+        </ng-template>
+    </div>
+    <div class="posts">
+        <ul *ngFor="let post of posts">
+            <app-post [post]="post"></app-post>
+        </ul>
+    </div>
+</div>

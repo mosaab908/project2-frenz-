@@ -1,0 +1,25 @@
+<div class="toolbar" role="banner">
+    <div class="logo">
+        <a [routerLink]="['/post-feed']">
+            <img id="logo"
+            alt="business Logo"
+            src="assets/images/frenzlogo.png"
+            title="business logo"
+            />
+        </a>
+    </div>
+    <div class="spacer"></div>
+    <div class="dropdown">
+        <button class="dropbtn">
+            <a [routerLink]="['/post-feed']">
+                <img class="logo" src="assets/images/dropdown.png">
+            </a>
+            <div class="dropdown-content">
+                <a [routerLink]="['/post-feed']">Home</a>
+                <!-- <a (click)="goToProfile()" [routerLink]="['/profile']">Profile</a> -->
+                <a rel="noopener" href="http://localhost:4200/profile" (click)="goToProfile()">Profile</a>
+                <a (click)="logout()">Logout</a>
+            </div>
+        </button>
+    </div>
+</div>

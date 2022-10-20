@@ -1,0 +1,1 @@
+export const baseUrl = "http://frenzsocialmediabeanstalk-env.eba-2zgug57t.us-east-1.elasticbeanstalk.com";
